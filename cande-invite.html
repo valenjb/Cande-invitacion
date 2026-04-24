@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Cande W 🎂</title>
+<style>
+  * { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    /* FIX: Quita el flash azul al tocar en móviles */
+    -webkit-tap-highlight-color: transparent; 
+  }
+
+  body {
+    font-family: Georgia, serif;
+    background: #fff;
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* Evita que se pueda seleccionar texto por error */
+    user-select: none;
+    -webkit-user-select: none;
+    overflow-x: hidden;
+  }
+
+  .screen {
+    display: none;
+    width: 100%;
+    max-width: 540px;
+    background: #fff;
+    padding: 40px 10px;
+    text-align: center;
+  }
+  .screen.active { display: block; }
+
+  h2 { font-size: 1.4rem; margin-bottom: 24px; line-height: 1.5; }
+  p  { font-size: 1rem; margin-bottom: 16px; color: #444; }
+
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+
+  button {
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 11px 28px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-family: Georgia, serif;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #555;
+    border: 1px solid #ccc;
+  }
+
+  .feedback {
+    background: transparent;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 0.95rem;
+    display: none;
+  }
+
+  #overlay-rickroll, #overlay-emo, #overlay-y2k {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: #000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #overlay-rickroll.show, #overlay-emo.show, #overlay-y2k.show { display: flex; }
+
+  #overlay-y2k { font-family: 'Comic Sans MS', cursive; color: lime; }
+  #overlay-y2k h1 {
+    font-size: 2rem;
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff;
+    animation: blink 0.5s infinite;
+    margin-bottom: 20px;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .emo-img {
+    height: 100vh;
+    width: auto;
+    max-width: 100vw;
+    object-fit: contain;
+    display: block;
+  }
+
+  video { width: 100%; height: 100%; object-fit: cover; }
+
+  /* FLAPPY */
+  #flappy-wrapper {
+    position: relative;
+    margin: 0 auto 16px;
+    width: 320px;
+    height: 400px;
+    background: #f0f0f0;
+    border: 1px solid #000;
+    border-radius: 8px;
+    overflow: hidden;
+    /* Evita scroll al tocar el área de juego */
+    touch-action: none; 
+  }
+  #flappy-canvas { display: block; width: 100%; height: 100%; cursor: pointer; }
+  
+  #score-display {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+  }
+
+  .invite-card { border: 1px solid #000; padding: 28px 20px; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<div class="screen active" id="s1">
+  <h2>¿Qué día cae el 2 de mayo?</h2>
+  <div class="options" id="s1-opts">
+    <button onclick="s1Answer('Viernes')">Viernes</button>
+    <button onclick="s1Answer('Sábado')">Sábado</button>
+    <button onclick="s1Answer('Domingo')">Domingo</button>
+    <button onclick="s1Answer('Lunes')">Lunes</button>
+  </div>
+  <div class="feedback" id="s1-feedback"></div>
+  <div id="s1-part2" style="display:none;">
+    <p>Entonces... ¿esto es una invitación?</p>
+    <div class="options">
+      <button onclick="s1b('si')">Sí</button>
+      <button onclick="s1b('no')">No</button>
+      <button onclick="s1b('nose')">No sé</button>
+    </div>
+    <div class="feedback" id="s1b-feedback"></div>
+    <button id="s1-ok" style="display:none; margin-top:10px;" onclick="goTo('s2')">Ok ✓</button>
+  </div>
+</div>
+
+<div class="screen" id="s2">
+  <h2>¿Qué es Rosebud?</h2>
+  <div class="options" id="s2-opts">
+    <button onclick="s2Answer('que')">¿Qué?</button>
+    <button onclick="s2Answer('trineo')">Un trineo 🛷</button>
+    <button onclick="s2Answer('cande')">Cande</button>
+  </div>
+  <div class="feedback" id="s2-feedback"></div>
+  <button id="s2-next" style="display:none;" onclick="goTo('s3')">Siguiente →</button>
+</div>
+
+<div class="screen" id="s3">
+  <h2>¿Cuál es el mejor Spiderman?</h2>
+  <div class="options" id="s3-opts">
+    <button onclick="s3Answer()">Tobey Maguire 🕷️</button>
+    <button onclick="s3Answer()">Andrew Garfield 🕸️</button>
+    <button onclick="s3Answer()">Tom Holland 🤸</button>
+  </div>
+  <div class="feedback" id="s3-feedback"></div>
+  <button id="s3-next" style="display:none;" onclick="goTo('s4')">Siguiente →</button>
+</div>
+
+<div class="screen" id="s4">
+  <h2>Elegí una puerta</h2>
+  <div class="options">
+    <button onclick="openDoor('a')">🚪 Puerta A</button>
+    <button onclick="openDoor('b')">🚪 Puerta B</button>
+    <button onclick="openDoor('c')">🚪 Puerta C</button>
+  </div>
+</div>
+
+<div class="screen" id="s5">
+  <h2>🐦 Flappy Cande</h2>
+  <div id="flappy-wrapper">
+    <canvas id="flappy-canvas" width="320" height="400"></canvas>
+    <div id="score-display">Postes: <span id="current-score">0</span>/5</div>
+    <div id="flappy-start-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.4);">
+      <button onclick="startFlappy()">▶ Jugar</button>
+    </div>
+  </div>
+  <div id="flappy-result" style="display:none; margin-top:12px;"></div>
+</div>
+
+<div class="screen" id="s6">
+  <div class="invite-card">
+    <h1>🎂</h1>
+    <h2>¡Cumple de Cande W!</h2>
+    <p>📅 2 de mayo | 🕙 22 hs<br>📍 Miguel Cané 1819</p>
+  </div>
+  <button onclick="alert('Descargando...')" style="width:100%;">⬇ Descargar invitación</button>
+  <p onclick="document.getElementById('confirm-msg').style.display='block'" style="margin-top:20px; cursor:pointer; text-decoration:underline;">✅ Confirmar asistencia</p>
+  <p id="confirm-msg" style="display:none; margin-top:12px; font-weight:bold;">¡Te esperamos allí! 🎉</p>
+</div>
+
+<div id="overlay-rickroll">
+  <video id="rick-vid" playsinline><source src="rick.mp4" type="video/mp4"></video>
+</div>
+<div id="overlay-emo">
+  <img src="emo.jpg" class="emo-img" id="img-emo-musical" alt="Emo el Musical">
+</div>
+<div id="overlay-y2k">
+    <h1>★ BIENVENIDX ★</h1>
+    <p style="color:cyan; margin-bottom: 10px;">✨ CANDE W BIRTHDAY PARTY 2026 ✨</p>
+    <p style="color:lime; margin-bottom: 10px;">🌟 YOU ARE VISITOR #000420 🌟</p>
+    <p style="color:cyan;">⚡ BEST VIEWED IN INTERNET EXPLORER ⚡</p>
+    <p style="color:#ff0; font-size:0.8rem; margin-top: 15px;">~ * ~ under construction ~ * ~</p>
+    <p style="margin-top:20px; color: white;">💾 LOADING INVITATION... 💾</p>
+</div>
+
+<script>
+const faceImg = new Image(); faceImg.src = 'cara-cande.png';
+
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function s1Answer(day) {
+  document.getElementById('s1-opts').style.display = 'none';
+  const fb = document.getElementById('s1-feedback');
+  fb.style.display = 'block';
+  fb.innerHTML = (day === 'Sábado') 
+    ? '❌ <strong>¡Incorrecto! ¡Es el cumple de Cande!</strong> (igual si cae sábado)' 
+    : `❌ <strong>¡ERROR! ¡Cae el cumple de Cande!</strong> (cae sábado)`;
+  document.getElementById('s1-part2').style.display = 'block';
+}
+
+function s1b(opt) {
+  const msgs = {
+    si: '¡Sii!! 🎉 Pero antes... una trivia.',
+    no: '❌ ¡ERROR! Es una invitación. Pero antes... una trivia.',
+    nose: '¡No tengas miedo!! Es una invitación. Pero antes... una trivia.'
+  };
+  document.getElementById('s1b-feedback').style.display = 'block';
+  document.getElementById('s1b-feedback').innerHTML = msgs[opt];
+  document.getElementById('s1-ok').style.display = 'inline-block';
+  event.target.closest('.options').style.display = 'none';
+}
+
+function s2Answer(opt) {
+  const msgs = {
+    que: '🤷 ¡Same! Igual, siguiente...',
+    trineo: '🛷 ¡Qué inteligente!!',
+    cande: '❌ No... pero sí 😄 Siguiente.'
+  };
+  document.getElementById('s2-feedback').style.display = 'block';
+  document.getElementById('s2-feedback').innerHTML = msgs[opt];
+  document.getElementById('s2-next').style.display = 'inline-block';
+  document.getElementById('s2-opts').style.display = 'none';
+}
+
+function s3Answer() {
+  document.getElementById('s3-feedback').style.display = 'block';
+  document.getElementById('s3-feedback').innerHTML = '✅ ¡Correcto!! Traé algo para tomar 🥤';
+  document.getElementById('s3-next').style.display = 'inline-block';
+  document.getElementById('s3-opts').style.display = 'none';
+}
+
+function openDoor(door) {
+  if (door === 'a') {
+    const ov = document.getElementById('overlay-y2k');
+    ov.classList.add('show');
+    setTimeout(() => { document.getElementById('overlay-y2k').classList.remove('show'); goTo('s5'); }, 2000);
+  } else if (door === 'b') {
+    const ov = document.getElementById('overlay-rickroll');
+    const vid = document.getElementById('rick-vid');
+    ov.classList.add('show'); vid.play();
+    vid.onended = () => { ov.classList.remove('show'); goTo('s5'); };
+  } else if (door === 'c') {
+    const ov = document.getElementById('overlay-emo');
+    const img = document.getElementById('img-emo-musical');
+    img.src = 'emo.jpg?' + new Date().getTime();
+    ov.classList.add('show');
+    setTimeout(() => { document.getElementById('overlay-emo').classList.remove('show'); goTo('s5'); }, 2000);
+  }
+}
+
+// FLAPPY BIRD MODO FÁCIL CON MENSAJES ORIGINALES
+let flappyActive = false;
+function startFlappy() {
+  document.getElementById('flappy-start-overlay').style.display = 'none';
+  document.getElementById('flappy-result').style.display = 'none';
+  document.getElementById('current-score').innerText = "0";
+  flappyActive = true;
+  runFlappy();
+}
+
+function runFlappy() {
+  const canvas = document.getElementById('flappy-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  let bird = { x: 50, y: H/2, vy: 0, r: 12 };
+  let pipes = [], frame = 0, gameOver = false, score = 0;
+  let totalPipesCreated = 0;
+
+  // Soporte para touch y click sin delay
+  function jumpAction(e) {
+    if(!flappyActive) return;
+    e.preventDefault(); 
+    bird.vy = -4.2; 
+  }
+
+  canvas.onmousedown = jumpAction;
+  canvas.ontouchstart = jumpAction;
+
+  function loop() {
+    if (!flappyActive) return;
+    ctx.fillStyle = '#87ceeb'; ctx.fillRect(0,0,W,H);
+    
+    bird.vy += 0.15; 
+    bird.y += bird.vy;
+
+    if (faceImg.complete) {
+      ctx.drawImage(faceImg, bird.x-20, bird.y-20, 40, 40);
+    } else {
+      ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(bird.x, bird.y, bird.r, 0, Math.PI*2); ctx.fill();
+    }
+
+    if (frame % 130 === 0 && totalPipesCreated < 5) {
+      let gap = 160;
+      let top = 20 + Math.random()*(H-gap-60);
+      let isLast = (totalPipesCreated === 4);
+      pipes.push({ x: W, top, bottom: top+gap, passed: false, isMeta: isLast });
+      totalPipesCreated++;
+    }
+
+    for (let i = pipes.length - 1; i >= 0; i--) {
+      let p = pipes[i];
+      p.x -= 1.4;
+      
+      ctx.fillStyle = '#2ecc71'; 
+      ctx.fillRect(p.x, 0, 40, p.top);
+      ctx.fillRect(p.x, p.bottom, 40, H-p.bottom);
+      
+      if (p.isMeta) drawMeta(ctx, p);
+
+      if (!p.passed && bird.x > p.x + 40) {
+        p.passed = true;
+        score++;
+        document.getElementById('current-score').innerText = score;
+      }
+      
+      if (p.isMeta && bird.x > (p.x + 40 + 25)) { 
+          winGame();
+          return;
+      }
+
+      if (bird.x+10 > p.x && bird.x-10 < p.x+40 && (bird.y-10 < p.top || bird.y+10 > p.bottom)) gameOver = true;
+      if (p.x < -100) pipes.splice(i, 1);
+    }
+
+    ctx.fillStyle = '#8B6914'; ctx.fillRect(0, H-15, W, 15);
+    if (bird.y > H-15 || bird.y < 0) gameOver = true;
+
+    if (gameOver) {
+      flappyActive = false;
+      const res = document.getElementById('flappy-result');
+      res.style.display = 'block';
+      res.innerHTML = `
+        <p style="font-size:1.3rem; margin-bottom:12px;">xd<br>igual estás invitadx :)</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button onclick="startFlappy()" class="btn-secondary">Revivir</button>
+          <button onclick="goTo('s6')">Siguiente →</button>
+        </div>
+      `;
+    }
+    frame++;
+    requestAnimationFrame(loop);
+  }
+
+  function drawMeta(ctx, pipe) {
+      let huecoCentro = pipe.top + (pipe.bottom - pipe.top) / 2;
+      let banderaX = pipe.x + 40 + 25; 
+      let banderaY = huecoCentro - 15;
+      ctx.fillStyle = '#666';
+      ctx.fillRect(banderaX, huecoCentro - 30, 3, 60);
+      ctx.fillStyle = '#e74c3c';
+      ctx.beginPath();
+      ctx.moveTo(banderaX + 3, banderaY);
+      ctx.lineTo(banderaX + 25, banderaY + 10);
+      ctx.lineTo(banderaX + 3, banderaY + 20);
+      ctx.fill();
+  }
+
+  function winGame() {
+    flappyActive = false;
+    const res = document.getElementById('flappy-result');
+    res.style.display = 'block';
+    res.innerHTML = `
+      <p style="font-size:1.3rem; margin-bottom:16px;">ok gamer 🎮</p>
+      <button onclick="goTo('s6')">Siguiente →</button>
+    `;
+  }
+
+  loop();
+}
+</script>
+</body>
+</html>
