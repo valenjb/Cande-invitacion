@@ -387,7 +387,7 @@ function runFlappy() {
       `;
     }
     frame++;
-    requestAnimationFrame(loop);
+    setTimeout(loop, 16);
   }
 
   function drawMeta(ctx, pipe) {
