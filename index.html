@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <title>★</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap');
  
   :root {
     --hot-pink: #ff00cc;
@@ -21,6 +21,7 @@
     margin: 0; 
     padding: 0; 
     -webkit-tap-highlight-color: transparent; 
+    font-family: 'Raleway Dots', cursive !important;
   }
  
   body {
@@ -288,66 +289,66 @@
  
 <!-- SCREEN 1 -->
 <div class="screen active" id="s1">
-  <h2>¿Qué día cae el 2 de mayo?</h2>
+  <h2>qué día cae 2 de mayo?</h2>
   <div class="options" id="s1-opts">
-    <button onclick="s1Answer('Viernes')">Viernes</button>
-    <button onclick="s1Answer('Sábado')">Sábado</button>
-    <button onclick="s1Answer('Domingo')">Domingo</button>
-    <button onclick="s1Answer('Lunes')">Lunes</button>
+    <button onclick="s1Answer('Viernes')">viernes</button>
+    <button onclick="s1Answer('Sábado')">sábado</button>
+    <button onclick="s1Answer('Domingo')">domingo</button>
+    <button onclick="s1Answer('Lunes')">lunes</button>
   </div>
   <div class="feedback" id="s1-feedback"></div>
-  <button id="s1-next" style="display:none; margin-top:10px;" onclick="goTo('s1b')">Siguiente →</button>
+  <button id="s1-next" style="display:none; margin-top:10px;" onclick="goTo('s1b')">entonces...</button>
 </div>
  
 <!-- SCREEN 1B -->
 <div class="screen" id="s1b">
-  <h2 id="s1b-title">Entonces... ¿esto es una invitación?</h2>
+  <h2 id="s1b-title">esto es una invitación?</h2>
   <div class="options" id="s1b-opts">
-    <button onclick="s1b('si', this)">Sí</button>
-    <button onclick="s1b('no', this)">No</button>
-    <button onclick="s1b('nose', this)">No sé</button>
+    <button onclick="s1b('si', this)">sí</button>
+    <button onclick="s1b('no', this)">no</button>
+    <button onclick="s1b('nose', this)">no sé</button>
   </div>
   <div class="feedback" id="s1b-feedback"></div>
-  <button id="s1-ok" style="display:none; margin-top:10px;" onclick="goTo('s2')">Ok ✓</button>
+  <button id="s1-ok" style="display:none; margin-top:10px;" onclick="goTo('s2')">ok</button>
 </div>
  
 <!-- SCREEN 2 -->
 <div class="screen" id="s2">
-  <h2 id="s2-title">¿Qué es Rosebud?</h2>
+  <h2 id="s2-title">qué es Rosebud?</h2>
   <div class="options" id="s2-opts">
-    <button onclick="s2Answer('que')">¿Qué?</button>
-    <button onclick="s2Answer('trineo')">Un trineo 🛷</button>
-    <button onclick="s2Answer('cande')">Cande</button>
+    <button onclick="s2Answer('que')">qué?</button>
+    <button onclick="s2Answer('trineo')">un trineo</button>
+    <button onclick="s2Answer('cande')">cande</button>
   </div>
   <div class="feedback" id="s2-feedback"></div>
-  <button id="s2-next" style="display:none;" onclick="goTo('s3')">Siguiente →</button>
+  <button id="s2-next" style="display:none;" onclick="goTo('s3')">Siguiente</button>
 </div>
  
 <!-- SCREEN 3 -->
 <div class="screen" id="s3">
-  <h2 id="s3-title">¿Cuál es el mejor Spiderman?</h2>
+  <h2 id="s3-title">cual es el mejor Spiderman?</h2>
   <div class="options" id="s3-opts">
-    <button onclick="s3Answer()">Tobey Maguire 🕷️</button>
-    <button onclick="s3Answer()">Andrew Garfield 🕸️</button>
-    <button onclick="s3Answer()">Tom Holland 🤸</button>
+    <button onclick="s3Answer()">Tobey Maguire</button>
+    <button onclick="s3Answer()">Andrew Garfield</button>
+    <button onclick="s3Answer()">Tom Holland</button>
   </div>
   <div class="feedback" id="s3-feedback"></div>
-  <button id="s3-next" style="display:none;" onclick="goTo('s4')">Siguiente →</button>
+  <button id="s3-next" style="display:none;" onclick="goTo('s4')">Siguiente</button>
 </div>
  
 <!-- SCREEN 4 -->
 <div class="screen" id="s4">
-  <h2>Elegí una puerta</h2>
+  <h2>elegí una puerta</h2>
   <div class="options">
-    <button onclick="openDoor('a')">🚪 Puerta A</button>
-    <button onclick="openDoor('b')">🚪 Puerta B</button>
-    <button onclick="openDoor('c')">🚪 Puerta C</button>
+    <button onclick="openDoor('a')">🚪</button>
+    <button onclick="openDoor('b')">🚪</button>
+    <button onclick="openDoor('c')">🚪</button>
   </div>
 </div>
  
 <!-- SCREEN 5: FLAPPY -->
 <div class="screen" id="s5">
-  <h2>🐦 Flappy Cande</h2>
+  <h2></h2>
   <div id="flappy-wrapper">
     <canvas id="flappy-canvas" width="320" height="400"></canvas>
     <div id="score-display">Postes: <span id="current-score">0</span>/5</div>
@@ -360,15 +361,15 @@
  
 <!-- SCREEN 6: INVITACIÓN -->
 <div class="screen" id="s6">
-  <marquee style="color:var(--yellow); font-weight:bold; margin-bottom:16px; display:block;">🎂 CUMPLE DE CANDE W 🎂 2 DE MAYO 🎂 22HS 🎂 MIGUEL CANÉ 1819 🎂</marquee>
+  <marquee style="color:var(--yellow); font-weight:bold; margin-bottom:16px; display:block;"></marquee>
   <div class="invite-card">
     <h1>🎂</h1>
-    <h2>¡Cumple de Cande W!</h2>
-    <p>📅 2 de mayo | 🕙 22 hs<br>📍 Miguel Cané 1819, Banfield</p>
+    <h2>vEní A festAjar Mis 21!!</h2>
+    <p>   sÁbado 2 de maYo |  22 hs<br>📍 Miguel Cané 1819, Banfield</p>
   </div>
   <button onclick="alert('Descargando...')" style="width:100%; margin-bottom:12px;">⬇ Descargar invitación</button>
-  <p style="margin-top:12px;">✅ Confirmar asistencia porfi</p>
-  <p id="confirm-msg" style="display:block; margin-top:12px; font-weight:bold; color:var(--lime); text-shadow:0 0 10px var(--lime);">¡Te esperamos allí! 🎉</p>
+  <p style="display:block; margin-top:12px; font-weight:bold; color:var(--lime); text-shadow:0 0 10px var(--lime);">confirmar asistencia ✮⋆˙⁺‧₊˚</p>
+  <p id="confirm-msg" style="margin-top:12px;">te podes quedar hasta que salga el sol</p>
 </div>
  
 <!-- OVERLAYS -->
@@ -406,7 +407,7 @@ function starsExplode(btn) {
   const cx = rect.left + rect.width / 2;
   const cy = rect.top + rect.height / 2;
   const emojis = ['⭐','✨','💫','🌟','⚡','🎆','🎇','🌈','💥','🔥','🎉','🎊'];
-  const total = 400;
+  const total = 200;
  
   for (let i = 0; i < total; i++) {
     setTimeout(() => {
@@ -437,16 +438,16 @@ function s1Answer(day) {
   const fb = document.getElementById('s1-feedback');
   fb.style.display = 'block';
   fb.innerHTML = (day === 'Sábado')
-    ? '❌ ¡Incorrecto! ¡Es el cumple de Cande! (igual si cae sábado)'
-    : '❌ ¡ERROR! ¡Cae el cumple de Cande! (cae sábado)';
+    ? 'ERROR! <br>cae el cumple de Cande ⋆｡𖦹°‧ <br>(igual si cae sábado)'
+    : 'ERROR! <br>cae el cumple de Cande ⋆｡𖦹°‧ <br>(y cae sábado)';
   document.getElementById('s1-next').style.display = 'inline-block';
 }
  
 function s1b(opt, btn) {
   const msgs = {
-    si:   '¡Sii!! 🎉 Pero antes... una trivia.',
-    no:   '❌ ¡ERROR! Es una invitación. Pero antes... una trivia.',
-    nose: '¡No tengas miedo!! Es una invitación. Pero antes... una trivia.'
+    si:   'sii!! 🎉 <br>pero antes... una triviA ✮',
+    no:   'es una invitación. <br>pero antes... una triviA ✮',
+    nose: 'es una invitación. <br>pero antes... una triviA ✮'
   };
   document.getElementById('s1b-title').style.display = 'none';
   document.getElementById('s1b-feedback').style.display = 'block';
@@ -457,9 +458,9 @@ function s1b(opt, btn) {
  
 function s2Answer(opt) {
   const msgs = {
-    que:    '🤷 ¡Same! Igual, siguiente...',
-    trineo: '🛷 ¡Qué inteligente!!',
-    cande:  '❌ No... pero sí 😄 Siguiente.'
+    que:    'same...',
+    trineo: 'que inteligente!!',
+    cande:  'depende. igual cuenta!'
   };
   document.getElementById('s2-title').style.display = 'none';
   document.getElementById('s2-feedback').style.display = 'block';
@@ -471,7 +472,7 @@ function s2Answer(opt) {
 function s3Answer() {
   document.getElementById('s3-title').style.display = 'none';
   document.getElementById('s3-feedback').style.display = 'block';
-  document.getElementById('s3-feedback').innerHTML = '✅ ¡Correcto!! Traé algo para tomar 🥤';
+  document.getElementById('s3-feedback').innerHTML = 'sii!! <br>traé lo que vas a tomar 🤪';
   document.getElementById('s3-next').style.display = 'inline-block';
   document.getElementById('s3-opts').style.display = 'none';
 }
@@ -567,7 +568,7 @@ function runFlappy() {
       const res = document.getElementById('flappy-result');
       res.style.display = 'block';
       res.innerHTML = `
-        <p style="font-size:1.3rem;margin-bottom:12px;color:#00ffff;text-shadow:0 0 10px #00ffff;">xd<br>igual estás invitadx :)</p>
+        <p style="font-size:1.3rem;margin-bottom:12px;color:#00ffff;text-shadow:0 0 10px #00ffff;">jaja mal ahí<br>igual estás invitadx :)</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
           <button onclick="startFlappy()" class="btn-secondary">Revivir</button>
           <button onclick="starsExplode(this)">Siguiente →</button>
