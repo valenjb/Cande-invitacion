@@ -260,6 +260,20 @@
     0%,100% { transform: translateY(0) rotate(0deg); }
     50%      { transform: translateY(-20px) rotate(10deg); }
   }
+ 
+  /* Explosión de estrellas */
+  .star-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    animation: explode var(--dur, 0.8s) cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    transform-origin: center;
+  }
+  @keyframes explode {
+    0%   { transform: translate(0, 0) scale(1.5) rotate(0deg);   opacity: 1; }
+    60%  { opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0) rotate(720deg); opacity: 0; }
+  }
 </style>
 </head>
 <body>
@@ -353,10 +367,10 @@
     <p>📅 2 de mayo | 🕙 22 hs<br>📍 Miguel Cané 1819, Banfield</p>
   </div>
   <button onclick="alert('Descargando...')" style="width:100%; margin-bottom:12px;">⬇ Descargar invitación</button>
-  <p style="margin-top:12px;" >✅ Confirmar asistencia porfi</p>
+  <p style="margin-top:12px;">✅ Confirmar asistencia porfi</p>
   <p id="confirm-msg" style="display:block; margin-top:12px; font-weight:bold; color:var(--lime); text-shadow:0 0 10px var(--lime);">¡Te esperamos allí! 🎉</p>
 </div>
-
+ 
 <!-- OVERLAYS -->
 <div id="overlay-rickroll">
   <video id="rick-vid" playsinline><source src="rick.mp4" type="video/mp4"></video>
@@ -385,6 +399,36 @@ function goTo(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
+}
+ 
+function starsExplode(btn) {
+  const rect = btn.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  const emojis = ['⭐','✨','💫','🌟','⚡','🎆','🎇','🌈','💥','🔥','🎉','🎊'];
+  const total = 400;
+ 
+  for (let i = 0; i < total; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'star-particle';
+      el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      const size = 0.8 + Math.random() * 2.5;
+      el.style.fontSize = size + 'rem';
+      const angle = Math.random() * 360;
+      const dist = 100 + Math.random() * (Math.max(window.innerWidth, window.innerHeight) * 1.2);
+      const duration = 1800 + Math.random() * 2000;
+      el.style.left = cx + 'px';
+      el.style.top  = cy + 'px';
+      el.style.animationDuration = duration + 'ms';
+      el.style.setProperty('--tx', Math.cos(angle * Math.PI / 180) * dist + 'px');
+      el.style.setProperty('--ty', Math.sin(angle * Math.PI / 180) * dist + 'px');
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), duration + 100);
+    }, Math.random() * 600);
+  }
+ 
+  setTimeout(() => goTo('s6'), 2200);
 }
  
 function s1Answer(day) {
@@ -482,7 +526,6 @@ function runFlappy() {
   function loop() {
     if (!flappyActive) return;
     ctx.fillStyle = '#000033'; ctx.fillRect(0,0,W,H);
-    // Estrellas animadas
     ctx.fillStyle = 'rgba(255,255,255,0.6)';
     for (let s=0; s<15; s++) ctx.fillRect((s*37+frame)%W, (s*53)%H, 2, 2);
  
@@ -527,7 +570,7 @@ function runFlappy() {
         <p style="font-size:1.3rem;margin-bottom:12px;color:#00ffff;text-shadow:0 0 10px #00ffff;">xd<br>igual estás invitadx :)</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
           <button onclick="startFlappy()" class="btn-secondary">Revivir</button>
-          <button onclick="goTo('s6')">Siguiente →</button>
+          <button onclick="starsExplode(this)">Siguiente →</button>
         </div>`;
       return;
     }
@@ -549,7 +592,7 @@ function runFlappy() {
     res.style.display = 'block';
     res.innerHTML = `
       <p style="font-size:1.3rem;margin-bottom:16px;color:#ffff00;text-shadow:0 0 10px #ffff00;">ok gamer 🎮</p>
-      <button onclick="goTo('s6')">Siguiente →</button>`;
+      <button onclick="starsExplode(this)">Siguiente →</button>`;
   }
  
   loop();
