@@ -114,6 +114,8 @@
     overflow: hidden;
     /* Evita scroll al tocar el área de juego */
     touch-action: none; 
+    /* Evita q vaya lento en mobile */
+    will-change: transform;
   }
   #flappy-canvas { display: block; width: 100%; height: 100%; cursor: pointer; }
   
@@ -294,7 +296,10 @@ function openDoor(door) {
 
 // FLAPPY BIRD MODO FÁCIL CON MENSAJES ORIGINALES
 let flappyActive = false;
-function startFlappy() {
+async function startFlappy() {
+  if ('wakeLock' in navigator) {
+    try { await navigator.wakeLock.request('screen'); } catch(e) {}
+  }
   document.getElementById('flappy-start-overlay').style.display = 'none';
   document.getElementById('flappy-result').style.display = 'none';
   document.getElementById('current-score').innerText = "0";
