@@ -131,7 +131,7 @@
     font-size: 0.8rem;
   }
 
-  .invite-card { border: 1px solid #000; padding: 28px 20px; margin-bottom: 20px; }
+  .invite-card { padding: 28px 20px; margin-bottom: 20px; }
 </style>
 </head>
 <body>
@@ -145,16 +145,18 @@
     <button onclick="s1Answer('Lunes')">Lunes</button>
   </div>
   <div class="feedback" id="s1-feedback"></div>
-  <div id="s1-part2" style="display:none;">
-    <p>Entonces... ¿esto es una invitación?</p>
-    <div class="options">
-      <button onclick="s1b('si')">Sí</button>
-      <button onclick="s1b('no')">No</button>
-      <button onclick="s1b('nose')">No sé</button>
-    </div>
-    <div class="feedback" id="s1b-feedback"></div>
-    <button id="s1-ok" style="display:none; margin-top:10px;" onclick="goTo('s2')">Ok ✓</button>
+  <button id="s1-next" style="display:none; margin-top:10px;" onclick="goTo('s1b')">Siguiente →</button>
+</div>
+
+<div class="screen" id="s1b">
+  <h2>Entonces... ¿esto es una invitación?</h2>
+  <div class="options" id="s1b-opts">
+    <button onclick="s1b('si', this)">Sí</button>
+    <button onclick="s1b('no', this)">No</button>
+    <button onclick="s1b('nose', this)">No sé</button>
   </div>
+  <div class="feedback" id="s1b-feedback"></div>
+  <button id="s1-ok" style="display:none; margin-top:10px;" onclick="goTo('s2')">Ok ✓</button>
 </div>
 
 <div class="screen" id="s2">
@@ -207,8 +209,8 @@
     <p>📅 2 de mayo | 🕙 22 hs<br>📍 Miguel Cané 1819</p>
   </div>
   <button onclick="alert('Descargando...')" style="width:100%;">⬇ Descargar invitación</button>
-  <p onclick="document.getElementById('confirm-msg').style.display='block'" style="margin-top:20px; cursor:pointer; text-decoration:underline;">✅ Confirmar asistencia</p>
-  <p id="confirm-msg" style="display:none; margin-top:12px; font-weight:bold;">¡Te esperamos allí! 🎉</p>
+  <p  style="margin-top:20px;">✅ Confirmar asistencia porfi</p>
+  <p margin-top:12px; font-weight:bold;">¡Te esperamos allí! 🎉</p>
 </div>
 
 <div id="overlay-rickroll">
@@ -241,7 +243,7 @@ function s1Answer(day) {
   fb.innerHTML = (day === 'Sábado') 
     ? '❌ <strong>¡Incorrecto! ¡Es el cumple de Cande!</strong> (igual si cae sábado)' 
     : `❌ <strong>¡ERROR! ¡Cae el cumple de Cande!</strong> (cae sábado)`;
-  document.getElementById('s1-part2').style.display = 'block';
+  document.getElementById('s1-next').style.display = 'inline-block';
 }
 
 function s1b(opt) {
