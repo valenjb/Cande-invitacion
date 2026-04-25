@@ -3,8 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<title>Cande W 🎂</title>
+<title>★ CANDE W 🎂 ★</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+ 
+  :root {
+    --hot-pink: #ff00cc;
+    --cyan: #00ffff;
+    --yellow: #ffff00;
+    --lime: #00ff66;
+    --purple: #cc00ff;
+    --orange: #ff6600;
+  }
+ 
   * { 
     box-sizing: border-box; 
     margin: 0; 
@@ -13,60 +24,135 @@
   }
  
   body {
-    font-family: Georgia, serif;
-    background: #fff;
-    color: #222;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    background: #000033;
+    color: #fff;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 20px 20px 40px;
     user-select: none;
     -webkit-user-select: none;
     overflow-x: hidden;
+    background-image: 
+      radial-gradient(circle, #ffffff 1px, transparent 1px),
+      radial-gradient(circle, #ffffff 1px, transparent 1px);
+    background-size: 50px 50px, 80px 80px;
+    background-position: 0 0, 25px 25px;
+    animation: starfield 8s linear infinite;
+  }
+ 
+  @keyframes starfield {
+    0%   { background-position: 0 0, 25px 25px; }
+    100% { background-position: 0 50px, 25px 75px; }
   }
  
   .screen {
     display: none;
     width: 100%;
     max-width: 540px;
-    background: #fff;
-    padding: 40px 10px;
+    background: rgba(0, 0, 51, 0.9);
+    border: 3px solid var(--hot-pink);
+    box-shadow: 0 0 20px var(--hot-pink), 0 0 40px var(--purple), inset 0 0 20px rgba(255,0,204,0.1);
+    padding: 30px 20px;
     text-align: center;
+    border-radius: 4px;
+    animation: pulse-border 3s linear infinite;
   }
+ 
+  .screen::before {
+    content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
+    display: block;
+    color: var(--yellow);
+    font-size: 0.7rem;
+    margin-bottom: 16px;
+    animation: rainbow-text 1s linear infinite;
+  }
+ 
+  .screen::after {
+    content: '★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★';
+    display: block;
+    color: var(--yellow);
+    font-size: 0.7rem;
+    margin-top: 16px;
+    animation: rainbow-text 1s linear infinite reverse;
+  }
+ 
   .screen.active { display: block; }
  
-  h2 { font-size: 1.4rem; margin-bottom: 24px; line-height: 1.5; }
-  p  { font-size: 1rem; margin-bottom: 16px; color: #444; }
+  h2 { 
+    font-size: 1.4rem; 
+    margin-bottom: 24px; 
+    line-height: 1.5;
+    animation: rainbow-text 2s linear infinite;
+  }
+ 
+  p { 
+    font-size: 1rem; 
+    margin-bottom: 16px; 
+    color: var(--yellow);
+  }
+ 
+  @keyframes rainbow-text {
+    0%   { color: var(--hot-pink); text-shadow: 0 0 10px var(--hot-pink); }
+    16%  { color: var(--orange);   text-shadow: 0 0 10px var(--orange); }
+    33%  { color: var(--yellow);   text-shadow: 0 0 10px var(--yellow); }
+    50%  { color: var(--lime);     text-shadow: 0 0 10px var(--lime); }
+    66%  { color: var(--cyan);     text-shadow: 0 0 10px var(--cyan); }
+    83%  { color: var(--purple);   text-shadow: 0 0 10px var(--purple); }
+    100% { color: var(--hot-pink); text-shadow: 0 0 10px var(--hot-pink); }
+  }
+ 
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+ 
+  @keyframes pulse-border {
+    0%,100% { border-color: var(--hot-pink); box-shadow: 0 0 20px var(--hot-pink), inset 0 0 20px rgba(255,0,204,0.1); }
+    33%      { border-color: var(--cyan);     box-shadow: 0 0 20px var(--cyan),     inset 0 0 20px rgba(0,255,255,0.1); }
+    66%      { border-color: var(--purple);   box-shadow: 0 0 20px var(--purple),   inset 0 0 20px rgba(204,0,255,0.1); }
+  }
  
   .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
  
   button {
-    background: #000;
+    background: linear-gradient(135deg, var(--hot-pink), var(--purple));
     color: #fff;
-    border: none;
+    border: 2px solid var(--yellow);
     border-radius: 999px;
     padding: 11px 28px;
     font-size: 0.95rem;
     cursor: pointer;
-    font-family: Georgia, serif;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    font-weight: 700;
+    text-shadow: 1px 1px 0 #000;
+    animation: btn-glow 2s ease-in-out infinite alternate;
+    transition: transform 0.1s;
+  }
+  button:active { transform: scale(0.95); }
+ 
+  @keyframes btn-glow {
+    from { box-shadow: 0 0 10px var(--hot-pink), 3px 3px 0 #000; }
+    to   { box-shadow: 0 0 25px var(--cyan), 0 0 50px var(--purple), 3px 3px 0 #000; }
   }
  
   .btn-secondary {
     background: transparent;
-    color: #555;
-    border: 1px solid #ccc;
+    color: var(--cyan);
+    border: 2px solid var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
   }
  
   .feedback {
-    background: transparent;
     padding: 14px 18px;
     margin-bottom: 16px;
     text-align: center;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    font-weight: 700;
     display: none;
+    animation: rainbow-text 1.5s linear infinite;
   }
  
+  /* Overlays */
   #overlay-rickroll, #overlay-emo, #overlay-y2k {
     display: none;
     position: fixed;
@@ -80,15 +166,20 @@
   }
   #overlay-rickroll.show, #overlay-emo.show, #overlay-y2k.show { display: flex; }
  
-  #overlay-y2k { font-family: 'Comic Sans MS', cursive; color: lime; }
+  #overlay-y2k {
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    color: lime;
+    background: #000033;
+    background-image: radial-gradient(circle, #ffffff 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
   #overlay-y2k h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #ff00ff;
-    text-shadow: 0 0 10px #ff00ff;
-    animation: blink 0.5s infinite;
+    text-shadow: 0 0 20px #ff00ff, 3px 3px 0 #000;
+    animation: blink 0.4s infinite;
     margin-bottom: 20px;
   }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
  
   .emo-img {
     height: 100vh;
@@ -106,32 +197,82 @@
     margin: 0 auto 16px;
     width: 320px;
     height: 400px;
-    background: #f0f0f0;
-    border: 1px solid #000;
-    border-radius: 8px;
+    background: #000033;
+    border: 3px solid var(--cyan);
+    box-shadow: 0 0 20px var(--cyan);
+    border-radius: 4px;
     overflow: hidden;
-    touch-action: none; 
+    touch-action: none;
     will-change: transform;
   }
   #flappy-canvas { display: block; width: 100%; height: 100%; cursor: pointer; }
-  
+ 
   #score-display {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: rgba(0,0,0,0.5);
-    color: white;
+    background: rgba(0,0,0,0.8);
+    color: var(--yellow);
     padding: 5px 10px;
     border-radius: 20px;
-    font-family: sans-serif;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
     font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid var(--yellow);
+    text-shadow: 0 0 5px var(--yellow);
   }
  
-  .invite-card { padding: 28px 20px; margin-bottom: 20px; }
+  /* Invite card */
+  .invite-card {
+    padding: 28px 20px;
+    margin-bottom: 20px;
+    border: 2px dashed var(--yellow);
+    background: rgba(255,255,0,0.05);
+    box-shadow: inset 0 0 20px rgba(255,255,0,0.1);
+  }
+  .invite-card h1 { font-size: 3rem; animation: blink 1s infinite; }
+  .invite-card h2 { font-size: 1.6rem; margin-bottom: 12px; }
+ 
+  /* Marquee fijo */
+  .marquee-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--hot-pink);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.85rem;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+    padding: 4px 0;
+    z-index: 100;
+  }
+ 
+  /* Decos flotantes */
+  .deco {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.5rem;
+    animation: float 4s ease-in-out infinite;
+    z-index: 0;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-20px) rotate(10deg); }
+  }
 </style>
 </head>
 <body>
  
+<!-- Decoraciones -->
+<div class="deco" style="top:5%;  left:3%;  animation-delay:0s;">⭐</div>
+<div class="deco" style="top:10%; right:5%; animation-delay:0.5s;">💫</div>
+<div class="deco" style="top:40%; left:2%;  animation-delay:1s;">🌟</div>
+<div class="deco" style="top:60%; right:3%; animation-delay:1.5s;">✨</div>
+<div class="deco" style="top:80%; left:5%;  animation-delay:2s;">⭐</div>
+<div class="deco" style="top:85%; right:6%; animation-delay:2.5s;">💫</div>
+ 
+<!-- SCREEN 1 -->
 <div class="screen active" id="s1">
   <h2>¿Qué día cae el 2 de mayo?</h2>
   <div class="options" id="s1-opts">
@@ -144,6 +285,7 @@
   <button id="s1-next" style="display:none; margin-top:10px;" onclick="goTo('s1b')">Siguiente →</button>
 </div>
  
+<!-- SCREEN 1B -->
 <div class="screen" id="s1b">
   <h2 id="s1b-title">Entonces... ¿esto es una invitación?</h2>
   <div class="options" id="s1b-opts">
@@ -155,6 +297,7 @@
   <button id="s1-ok" style="display:none; margin-top:10px;" onclick="goTo('s2')">Ok ✓</button>
 </div>
  
+<!-- SCREEN 2 -->
 <div class="screen" id="s2">
   <h2 id="s2-title">¿Qué es Rosebud?</h2>
   <div class="options" id="s2-opts">
@@ -166,6 +309,7 @@
   <button id="s2-next" style="display:none;" onclick="goTo('s3')">Siguiente →</button>
 </div>
  
+<!-- SCREEN 3 -->
 <div class="screen" id="s3">
   <h2 id="s3-title">¿Cuál es el mejor Spiderman?</h2>
   <div class="options" id="s3-opts">
@@ -177,6 +321,7 @@
   <button id="s3-next" style="display:none;" onclick="goTo('s4')">Siguiente →</button>
 </div>
  
+<!-- SCREEN 4 -->
 <div class="screen" id="s4">
   <h2>Elegí una puerta</h2>
   <div class="options">
@@ -186,42 +331,51 @@
   </div>
 </div>
  
+<!-- SCREEN 5: FLAPPY -->
 <div class="screen" id="s5">
   <h2>🐦 Flappy Cande</h2>
   <div id="flappy-wrapper">
     <canvas id="flappy-canvas" width="320" height="400"></canvas>
     <div id="score-display">Postes: <span id="current-score">0</span>/5</div>
-    <div id="flappy-start-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.4);">
+    <div id="flappy-start-overlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,51,0.7);">
       <button onclick="startFlappy()">▶ Jugar</button>
     </div>
   </div>
   <div id="flappy-result" style="display:none; margin-top:12px;"></div>
 </div>
  
+<!-- SCREEN 6: INVITACIÓN -->
 <div class="screen" id="s6">
+  <marquee style="color:var(--yellow); font-weight:bold; margin-bottom:16px; display:block;">🎂 CUMPLE DE CANDE W 🎂 2 DE MAYO 🎂 22HS 🎂 MIGUEL CANÉ 1819 🎂</marquee>
   <div class="invite-card">
     <h1>🎂</h1>
     <h2>¡Cumple de Cande W!</h2>
-    <p>📅 2 de mayo | 🕙 22 hs<br>📍 Miguel Cané 1819</p>
+    <p>📅 2 de mayo | 🕙 22 hs<br>📍 Miguel Cané 1819, Banfield</p>
   </div>
-  <button onclick="alert('Descargando...')" style="width:100%;">⬇ Descargar invitación</button>
-  <p style="margin-top:20px; cursor:pointer;" onclick="document.getElementById('confirm-msg').style.display='block'">✅ Confirmar asistencia porfi</p>
-  <p style="margin-top:12px; font-weight:bold;">¡Te esperamos allí! 🎉</p>
+  <button onclick="alert('Descargando...')" style="width:100%; margin-bottom:12px;">⬇ Descargar invitación</button>
+  <p style="margin-top:12px;" >✅ Confirmar asistencia porfi</p>
+  <p id="confirm-msg" style="display:block; margin-top:12px; font-weight:bold; color:var(--lime); text-shadow:0 0 10px var(--lime);">¡Te esperamos allí! 🎉</p>
 </div>
 
+<!-- OVERLAYS -->
 <div id="overlay-rickroll">
   <video id="rick-vid" playsinline><source src="rick.mp4" type="video/mp4"></video>
 </div>
 <div id="overlay-emo">
-  <img src="emo.jpg" class="emo-img" id="img-emo-musical" alt="Emo el Musical">
+  <img src="emo.jpg" class="emo-img" alt="Emo el Musical">
 </div>
 <div id="overlay-y2k">
-    <h1>★ BIENVENIDX ★</h1>
-    <p style="color:cyan; margin-bottom: 10px;">✨ CANDE W BIRTHDAY PARTY 2026 ✨</p>
-    <p style="color:lime; margin-bottom: 10px;">🌟 YOU ARE VISITOR #000420 🌟</p>
-    <p style="color:cyan;">⚡ BEST VIEWED IN INTERNET EXPLORER ⚡</p>
-    <p style="color:#ff0; font-size:0.8rem; margin-top: 15px;">~ * ~ under construction ~ * ~</p>
-    <p style="margin-top:20px; color: white;">💾 LOADING INVITATION... 💾</p>
+  <h1>★ BIENVENIDX ★</h1>
+  <p style="color:cyan; margin-bottom:10px; font-size:1.1rem;">✨ CANDE W BIRTHDAY PARTY 2026 ✨</p>
+  <p style="color:lime; margin-bottom:10px;">🌟 YOU ARE VISITOR #000420 🌟</p>
+  <p style="color:cyan;">⚡ BEST VIEWED IN INTERNET EXPLORER ⚡</p>
+  <marquee style="color:#ff0; font-size:0.9rem; margin-top:15px; display:block;">~ * ~ under construction ~ * ~ best viewed at 800x600 ~ * ~</marquee>
+  <p style="margin-top:20px; color:white;">💾 LOADING INVITATION... 💾</p>
+</div>
+ 
+<!-- Marquee fijo abajo -->
+<div class="marquee-bar">
+  <marquee>🌟 CANDE W CUMPLEAÑOS 2026 🌟 2 DE MAYO 🌟 22HS 🌟 MIGUEL CANÉ 1819 🌟 TE ESPERAMOS 🌟 CANDE W CUMPLEAÑOS 2026 🌟 2 DE MAYO 🌟 22HS 🌟 MIGUEL CANÉ 1819 🌟</marquee>
 </div>
  
 <script>
@@ -230,6 +384,7 @@ const faceImg = new Image(); faceImg.src = 'cara-cande.png';
 function goTo(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
 }
  
 function s1Answer(day) {
@@ -237,16 +392,16 @@ function s1Answer(day) {
   document.querySelector('#s1 h2').style.display = 'none';
   const fb = document.getElementById('s1-feedback');
   fb.style.display = 'block';
-  fb.innerHTML = (day === 'Sábado') 
-    ? '❌ <strong>¡Incorrecto! ¡Es el cumple de Cande!</strong> (igual si cae sábado)' 
-    : '❌ <strong>¡ERROR! ¡Cae el cumple de Cande!</strong> (cae sábado)';
+  fb.innerHTML = (day === 'Sábado')
+    ? '❌ ¡Incorrecto! ¡Es el cumple de Cande! (igual si cae sábado)'
+    : '❌ ¡ERROR! ¡Cae el cumple de Cande! (cae sábado)';
   document.getElementById('s1-next').style.display = 'inline-block';
 }
  
 function s1b(opt, btn) {
   const msgs = {
-    si: '¡Sii!! 🎉 Pero antes... una trivia.',
-    no: '❌ ¡ERROR! Es una invitación. Pero antes... una trivia.',
+    si:   '¡Sii!! 🎉 Pero antes... una trivia.',
+    no:   '❌ ¡ERROR! Es una invitación. Pero antes... una trivia.',
     nose: '¡No tengas miedo!! Es una invitación. Pero antes... una trivia.'
   };
   document.getElementById('s1b-title').style.display = 'none';
@@ -258,9 +413,9 @@ function s1b(opt, btn) {
  
 function s2Answer(opt) {
   const msgs = {
-    que: '🤷 ¡Same! Igual, siguiente...',
+    que:    '🤷 ¡Same! Igual, siguiente...',
     trineo: '🛷 ¡Qué inteligente!!',
-    cande: '❌ No... pero sí 😄 Siguiente.'
+    cande:  '❌ No... pero sí 😄 Siguiente.'
   };
   document.getElementById('s2-title').style.display = 'none';
   document.getElementById('s2-feedback').style.display = 'block';
@@ -302,7 +457,7 @@ async function startFlappy() {
   }
   document.getElementById('flappy-start-overlay').style.display = 'none';
   document.getElementById('flappy-result').style.display = 'none';
-  document.getElementById('current-score').innerText = "0";
+  document.getElementById('current-score').innerText = '0';
   flappyActive = true;
   runFlappy();
 }
@@ -312,65 +467,56 @@ function runFlappy() {
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
   let bird = { x: 50, y: H/2, vy: 0, r: 12 };
-  let pipes = [], frame = 0, gameOver = false, score = 0;
-  let totalPipesCreated = 0;
+  let pipes = [], frame = 0, gameOver = false, score = 0, totalPipesCreated = 0;
  
   function jumpAction(e) {
     if (!flappyActive) return;
-    e.preventDefault(); 
-    bird.vy = -4.2; 
+    e.preventDefault();
+    bird.vy = -4.2;
   }
- 
-  canvas.onmousedown = jumpAction;
+  canvas.onmousedown  = jumpAction;
   canvas.ontouchstart = jumpAction;
+ 
+  const pipeColors = ['#ff00cc','#00ffff','#ffff00','#00ff66','#cc00ff'];
  
   function loop() {
     if (!flappyActive) return;
-    ctx.fillStyle = '#87ceeb'; ctx.fillRect(0,0,W,H);
-    
-    bird.vy += 0.15; 
-    bird.y += bird.vy;
+    ctx.fillStyle = '#000033'; ctx.fillRect(0,0,W,H);
+    // Estrellas animadas
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    for (let s=0; s<15; s++) ctx.fillRect((s*37+frame)%W, (s*53)%H, 2, 2);
  
-    if (faceImg.complete) {
+    bird.vy += 0.15;
+    bird.y  += bird.vy;
+ 
+    if (faceImg.complete && faceImg.naturalWidth > 0) {
       ctx.drawImage(faceImg, bird.x-20, bird.y-20, 40, 40);
     } else {
-      ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(bird.x, bird.y, bird.r, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#ff00cc';
+      ctx.beginPath(); ctx.arc(bird.x, bird.y, bird.r, 0, Math.PI*2); ctx.fill();
     }
  
     if (frame % 130 === 0 && totalPipesCreated < 5) {
-      let gap = 160;
-      let top = 20 + Math.random()*(H-gap-60);
-      let isLast = (totalPipesCreated === 4);
-      pipes.push({ x: W, top, bottom: top+gap, passed: false, isMeta: isLast });
+      const gap = 160;
+      const top = 20 + Math.random()*(H-gap-60);
+      pipes.push({ x: W, top, bottom: top+gap, passed: false, isMeta: totalPipesCreated === 4 });
       totalPipesCreated++;
     }
  
-    for (let i = pipes.length - 1; i >= 0; i--) {
-      let p = pipes[i];
+    for (let i = pipes.length-1; i >= 0; i--) {
+      const p = pipes[i];
       p.x -= 1.4;
-      
-      ctx.fillStyle = '#2ecc71'; 
+      ctx.fillStyle = pipeColors[i % pipeColors.length];
       ctx.fillRect(p.x, 0, 40, p.top);
       ctx.fillRect(p.x, p.bottom, 40, H-p.bottom);
-      
       if (p.isMeta) drawMeta(ctx, p);
- 
-      if (!p.passed && bird.x > p.x + 40) {
-        p.passed = true;
-        score++;
-        document.getElementById('current-score').innerText = score;
-      }
-      
-      if (p.isMeta && bird.x > (p.x + 40 + 25)) { 
-        winGame();
-        return;
-      }
- 
+      if (!p.passed && bird.x > p.x+40) { p.passed = true; score++; document.getElementById('current-score').innerText = score; }
+      if (p.isMeta && bird.x > p.x+65) { winGame(); return; }
       if (bird.x+10 > p.x && bird.x-10 < p.x+40 && (bird.y-10 < p.top || bird.y+10 > p.bottom)) gameOver = true;
-      if (p.x < -100) pipes.splice(i, 1);
+      if (p.x < -100) pipes.splice(i,1);
     }
  
-    ctx.fillStyle = '#8B6914'; ctx.fillRect(0, H-15, W, 15);
+    ctx.fillStyle = '#ff6600'; ctx.fillRect(0, H-15, W, 15);
     if (bird.y > H-15 || bird.y < 0) gameOver = true;
  
     if (gameOver) {
@@ -378,12 +524,11 @@ function runFlappy() {
       const res = document.getElementById('flappy-result');
       res.style.display = 'block';
       res.innerHTML = `
-        <p style="font-size:1.3rem; margin-bottom:12px;">xd<br>igual estás invitadx :)</p>
+        <p style="font-size:1.3rem;margin-bottom:12px;color:#00ffff;text-shadow:0 0 10px #00ffff;">xd<br>igual estás invitadx :)</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
           <button onclick="startFlappy()" class="btn-secondary">Revivir</button>
           <button onclick="goTo('s6')">Siguiente →</button>
-        </div>
-      `;
+        </div>`;
       return;
     }
     frame++;
@@ -391,27 +536,20 @@ function runFlappy() {
   }
  
   function drawMeta(ctx, pipe) {
-    let huecoCentro = pipe.top + (pipe.bottom - pipe.top) / 2;
-    let banderaX = pipe.x + 40 + 25; 
-    let banderaY = huecoCentro - 15;
-    ctx.fillStyle = '#666';
-    ctx.fillRect(banderaX, huecoCentro - 30, 3, 60);
-    ctx.fillStyle = '#e74c3c';
-    ctx.beginPath();
-    ctx.moveTo(banderaX + 3, banderaY);
-    ctx.lineTo(banderaX + 25, banderaY + 10);
-    ctx.lineTo(banderaX + 3, banderaY + 20);
-    ctx.fill();
+    const centro = pipe.top + (pipe.bottom - pipe.top) / 2;
+    const bx = pipe.x + 65, by = centro - 15;
+    ctx.fillStyle = '#ffff00'; ctx.fillRect(bx, centro-30, 3, 60);
+    ctx.fillStyle = '#ff00cc';
+    ctx.beginPath(); ctx.moveTo(bx+3, by); ctx.lineTo(bx+25, by+10); ctx.lineTo(bx+3, by+20); ctx.fill();
   }
  
   function winGame() {
     flappyActive = false;
     const res = document.getElementById('flappy-result');
-    res.style.display = 'block'; 
+    res.style.display = 'block';
     res.innerHTML = `
-      <p style="font-size:1.3rem; margin-bottom:16px;">ok gamer 🎮</p>
-      <button onclick="goTo('s6')">Siguiente →</button>
-    `;
+      <p style="font-size:1.3rem;margin-bottom:16px;color:#ffff00;text-shadow:0 0 10px #ffff00;">ok gamer 🎮</p>
+      <button onclick="goTo('s6')">Siguiente →</button>`;
   }
  
   loop();
